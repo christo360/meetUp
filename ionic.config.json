@@ -1,0 +1,7 @@
+{
+  "name": "meetUp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
