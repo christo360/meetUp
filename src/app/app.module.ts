@@ -12,6 +12,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 //Ionic Local Storage
 import { IonicStorageModule } from '@ionic/storage';
 import { MeetupServiceProvider } from '../providers/meetup-service/meetup-service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,8 +24,12 @@ import { MeetupServiceProvider } from '../providers/meetup-service/meetup-servic
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
+  ],
+  exports: [
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

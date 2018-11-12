@@ -14,6 +14,13 @@ export class SettingsPage {
 
   }
 
+
+ ionViewDidLoad() {
+  this.getCategories()
+ }
+
+  
+
   public getCategories() {
     this.meetupService.getCategories().then(result => {
       var responseData = result as any;
