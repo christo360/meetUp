@@ -11,6 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 //Ionic Local Storage
 import { IonicStorageModule } from '@ionic/storage';
+import { MeetupServiceProvider } from '../providers/meetup-service/meetup-service';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    MeetupServiceProvider
   ]
 })
 export class AppModule {}
