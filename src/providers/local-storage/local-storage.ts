@@ -12,9 +12,8 @@ export class LocalStorageProvider {
 
   addInterestedCategory(category){
 
-    let Item = {category: category}
+    let Item = {category}
     this.storage.set(category.id.toString(), JSON.stringify(Item));
-    this.getAllInterestedCategories()
   }
 
   removeCategory(category){
@@ -24,7 +23,7 @@ export class LocalStorageProvider {
   getAllInterestedCategories(){
     let results = [];
     this.storage.forEach(data =>{
-      console.log(data);
+
       results.push(JSON.parse(data));
     });
     return results;
