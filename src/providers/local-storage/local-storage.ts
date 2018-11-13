@@ -14,6 +14,7 @@ export class LocalStorageProvider {
 
     let Item = {category: category}
     this.storage.set(category.id.toString(), JSON.stringify(Item));
+    this.getAllInterestedCategories()
   }
 
   removeCategory(category){
