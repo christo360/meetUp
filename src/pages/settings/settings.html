@@ -8,4 +8,10 @@
 
 <ion-content padding>
 
+    <ion-list>
+        <button ion-item *ngFor="let category of categories" (click)="itemSelected(category)">
+          {{category.name}}
+        </button>  
+      </ion-list>
+
 </ion-content>

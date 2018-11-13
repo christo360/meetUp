@@ -13,6 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
 import { MeetupServiceProvider } from '../providers/meetup-service/meetup-service';
 import { HttpClientModule } from '@angular/common/http';
+import { LocalStorageProvider } from '../providers/local-storage/local-storage';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MeetupServiceProvider
+    MeetupServiceProvider,
+    LocalStorageProvider
   ]
 })
 export class AppModule {}

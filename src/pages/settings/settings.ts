@@ -8,7 +8,7 @@ import { MeetupServiceProvider } from '../../providers/meetup-service/meetup-ser
 })
 export class SettingsPage {
 
-  public Categories = [];
+  public categories = [];
 
   constructor(public navCtrl: NavController, public meetupService: MeetupServiceProvider) {
 
@@ -22,12 +22,13 @@ export class SettingsPage {
   
 
   public getCategories() {
-    this.meetupService.getCategories().then(result => {
+    this.meetupService.getCategories().subscribe(result => {
       var responseData = result as any;
-      this.Categories = responseData;
-
-      console.log(this.Categories);
+      this.categories = responseData.results;
     });
   }
 
+  itemSelected(category) {
+    console.log(category)
+  }
 }
