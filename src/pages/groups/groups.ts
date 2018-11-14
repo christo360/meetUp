@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { MeetupServiceProvider } from '../../providers/meetup-service/meetup-service';
@@ -19,7 +19,8 @@ export class GroupsPage {
   constructor(public navCtrl: NavController,
               public localStorage: LocalStorageProvider,
               public meetupService: MeetupServiceProvider,
-              private formBuilder: FormBuilder ) {
+              private formBuilder: FormBuilder,
+              public loadingController: LoadingController ) {
 
               this.meetupForm = this.formBuilder.group({
                   location: ['', Validators.required],
@@ -45,14 +46,20 @@ export class GroupsPage {
 
   submitForm(){
 
-    var body = "location=" + this.meetupForm.value.location + "&category=" +this.checkedList ;
-    console.log(body);
-
-    this.meetupService.getGroups(this.meetupForm.value.location,this.checkedList).subscribe(result => {
-      var responseData = result as any;
-      this.groups = responseData;
-      console.log(this.groups);
-    })
+    let loader = this.loadingController.create(
+      {
+        content:'Loading Groups!',
+        spinner:'dots'
+      });
+      loader.present().then(()=>{
+        var body = "location=" + this.meetupForm.value.location + "&category=" +this.checkedList ;
+        console.log(body);
+        this.meetupService.getGroups(this.meetupForm.value.location,this.checkedList).subscribe(result => {
+          var responseData = result as any;
+          this.groups = responseData;
+          loader.dismiss();
+        })
+      });
   }
 
 }
