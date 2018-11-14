@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { MeetupServiceProvider } from '../../providers/meetup-service/meetup-service';
 
 @Component({
   selector: 'page-groups',
@@ -11,11 +12,13 @@ export class GroupsPage {
 
 
   public favouriteCategories = [];
+  public groups = [];
   public checkedList = [];
   private meetupForm : FormGroup;
 
   constructor(public navCtrl: NavController,
               public localStorage: LocalStorageProvider,
+              public meetupService: MeetupServiceProvider,
               private formBuilder: FormBuilder ) {
 
               this.meetupForm = this.formBuilder.group({
@@ -44,6 +47,12 @@ export class GroupsPage {
 
     var body = "location=" + this.meetupForm.value.location + "&category=" +this.checkedList ;
     console.log(body);
+
+    this.meetupService.getGroups(this.meetupForm.value.location,this.checkedList).subscribe(result => {
+      var responseData = result as any;
+      this.groups = responseData;
+      console.log(this.groups);
+    })
   }
 
 }

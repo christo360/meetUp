@@ -21,4 +21,11 @@ export class MeetupServiceProvider {
     return this.http.get(this.baseUrl+'/2/categories?key='+this.apiKey,{ params: params });
 }
 
+  public getGroups(location,categories): Observable<any> {
+    let params = new HttpParams()
+        .set('location',location)
+        .set('category',categories);
+        return this.http.get(this.baseUrl+'/find/groups?key='+this.apiKey,{ params: params });
+  }
+
 }
