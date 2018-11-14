@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController, ToastController } from 'ionic-angular';
 import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { MeetupServiceProvider } from '../../providers/meetup-service/meetup-service';
@@ -20,7 +20,9 @@ export class GroupsPage {
               public localStorage: LocalStorageProvider,
               public meetupService: MeetupServiceProvider,
               private formBuilder: FormBuilder,
-              public loadingController: LoadingController ) {
+              public loadingController: LoadingController,
+              public alertController: AlertController,
+              public toastController: ToastController ) {
 
               this.meetupForm = this.formBuilder.group({
                   location: ['', Validators.required],
@@ -29,7 +31,17 @@ export class GroupsPage {
   }
 
   ionViewDidLoad() {
-    this.favouriteCategories = this.localStorage.getAllInterestedCategories()
+    
+
+    let loader = this.loadingController.create(
+      {
+        content:'Loading!',
+        spinner:'dots'
+      });
+      loader.present().then(()=>{
+        this.favouriteCategories = this.localStorage.getAllInterestedCategories()
+        loader.dismiss();
+      });
    }
 
    checkboxChange(item, event) {
@@ -60,6 +72,34 @@ export class GroupsPage {
           loader.dismiss();
         })
       });
+  }
+
+  clearStorage() {
+
+    let confirm = this.alertController.create({
+      title:'Remove all favourite Categories',
+      message:'Are you sure you want to remove all categories from your favourites?',
+      buttons: [{
+
+        text:'Yes',
+        handler:() => {
+    
+          this.localStorage.removeAllFromStorage()
+          let toast = this.toastController.create({
+            message:'All categories have been removed',
+            duration: 3000,
+            position:'bottom'
+
+          });
+          toast.present();
+          window.location.reload();
+        }
+      },
+      {text:'No'}
+    ]
+    });
+    confirm.present();
+    
   }
 
 }

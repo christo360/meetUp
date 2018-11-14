@@ -29,4 +29,9 @@ export class LocalStorageProvider {
     return results;
   }
 
+  removeAllFromStorage(){
+    this.storage.clear();
+    console.log("Removal");
+  }
+
 }

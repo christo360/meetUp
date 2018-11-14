@@ -6,8 +6,8 @@
 
 <ion-content padding>
   <h2>Welcome to MeetUp!</h2>
-  <form [formGroup]="meetupForm" (ngSubmit)="submitForm()">
     <ion-list>  
+        <form [formGroup]="meetupForm" (ngSubmit)="submitForm()">
         <ion-item>
             <ion-label color="primary">City Name</ion-label>
             <ion-input type="text" formControlName="location"  placeholder="ex. London"></ion-input>
@@ -17,9 +17,9 @@
         <ion-checkbox (ionChange)="checkboxChange(item.category,$event)"></ion-checkbox>
       </ion-item>
       <button ion-button round [disabled]="!meetupForm.valid">Submit</button>
+    </form>
+      <button ion-button round [disabled]="!favouriteCategories" (click)="clearStorage()">Delete all Categories</button>
     </ion-list>
-  </form>
-
   <ion-card *ngFor="let group of groups">
    <!-- <img src="{{group.group_photo.photo_link}}"/> -->
      <ion-card-content>
