@@ -8,15 +8,11 @@
   <h2>Welcome to MeetUp!</h2>
     <ion-list>  
         <form [formGroup]="meetupForm" (ngSubmit)="submitForm()">
-        <ion-item>
-            <ion-label color="primary">City Name</ion-label>
-            <ion-input type="text" formControlName="location"  placeholder="ex. London"></ion-input>
-        </ion-item>
       <ion-item *ngFor="let item of favouriteCategories">
         <ion-label>{{item?.category.name}}</ion-label>
         <ion-checkbox (ionChange)="checkboxChange(item.category,$event)"></ion-checkbox>
       </ion-item>
-      <button ion-button round [disabled]="!meetupForm.valid">Submit</button>
+      <button ion-button round >Submit</button>
     </form>
       <button ion-button round [disabled]="!favouriteCategories" (click)="clearStorage()">Delete all Categories</button>
     </ion-list>
@@ -27,6 +23,7 @@
          {{group.name}} - {{group.localized_location}}
          </ion-card-title>
          {{group.description}}
+         {{group.meta_category.name}}
      </ion-card-content>
    </ion-card>
 </ion-content>

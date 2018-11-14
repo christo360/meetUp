@@ -64,11 +64,11 @@ export class GroupsPage {
         spinner:'dots'
       });
       loader.present().then(()=>{
-        var body = "location=" + this.meetupForm.value.location + "&category=" +this.checkedList ;
-        console.log(body);
-        this.meetupService.getGroups(this.meetupForm.value.location,this.checkedList).subscribe(result => {
+        var location = "location=Johannesburg";
+        this.meetupService.getGroups(location,this.checkedList).subscribe(result => {
           var responseData = result as any;
           this.groups = responseData;
+          console.log(this.groups);
           loader.dismiss();
         })
       });

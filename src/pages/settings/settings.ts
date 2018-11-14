@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { MeetupServiceProvider } from '../../providers/meetup-service/meetup-service';
 import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
+import { GroupsPage } from '../groups/groups';
 
 @Component({
   selector: 'page-settings',
@@ -56,6 +57,7 @@ export class SettingsPage {
 
             });
             toast.present();
+            this.navCtrl.push(GroupsPage);
           }
         },
         {text:'No'}
