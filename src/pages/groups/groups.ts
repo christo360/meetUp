@@ -3,6 +3,7 @@ import { NavController, LoadingController, AlertController, ToastController } fr
 import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { MeetupServiceProvider } from '../../providers/meetup-service/meetup-service';
+import { SettingsPage } from '../settings/settings';
 
 @Component({
   selector: 'page-groups',
@@ -120,6 +121,10 @@ export class GroupsPage {
     });
     confirm.present();
     
+  }
+
+  goToSettingsPage(){
+    this.navCtrl.push(SettingsPage);
   }
 
 }
