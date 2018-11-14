@@ -19,4 +19,14 @@
       <button ion-button round [disabled]="!meetupForm.valid">Submit</button>
     </ion-list>
   </form>
+
+  <ion-card *ngFor="let group of groups">
+   <!-- <img src="{{group.group_photo.photo_link}}"/> -->
+     <ion-card-content>
+       <ion-card-title>
+         {{group.name}} - {{group.localized_location}}
+         </ion-card-title>
+         {{group.description}}
+     </ion-card-content>
+   </ion-card>
 </ion-content>

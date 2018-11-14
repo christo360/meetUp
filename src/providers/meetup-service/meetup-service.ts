@@ -24,7 +24,7 @@ export class MeetupServiceProvider {
   public getGroups(location,categories): Observable<any> {
     let params = new HttpParams()
         .set('location',location)
-        .set('category',categories);
+        .set('category',categories)
         return this.http.get(this.baseUrl+'/find/groups?key='+this.apiKey,{ params: params });
   }
 

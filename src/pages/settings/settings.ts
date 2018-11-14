@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ToastController } from 'ionic-angular';
+import { NavController, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { MeetupServiceProvider } from '../../providers/meetup-service/meetup-service';
 import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
 
@@ -15,28 +15,31 @@ export class SettingsPage {
               public meetupService: MeetupServiceProvider,
               public localStorageService: LocalStorageProvider,
               public alertController: AlertController,
-              public toastController: ToastController) {
+              public toastController: ToastController,
+              public loadingController: LoadingController) {
 
   }
 
 
  ionViewDidLoad() {
-  this.getCategories()
+  let loader = this.loadingController.create(
+    {
+      content:'Loading Categories!',
+      spinner:'dots'
+    });
+
+    loader.present().then(()=>{
+      this.meetupService.getCategories().subscribe(result => {
+        var responseData = result as any;
+        this.categories = responseData.results;
+        loader.dismiss();
+      });
+    });
  }
 
   
-
-  public getCategories() {
-    this.meetupService.getCategories().subscribe(result => {
-      var responseData = result as any;
-      this.categories = responseData.results;
-    });
-  }
-
- 
   itemSelected(category){
 
-    
       let confirm = this.alertController.create({
         title:'Add to favourite?',
         message:'Are you sure you want to add this category as a favourite?',
@@ -58,12 +61,7 @@ export class SettingsPage {
         {text:'No'}
       ]
       });
-      confirm.present();
-      
-  
-
+      confirm.present(); 
   }
-
-
   
 }
