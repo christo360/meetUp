@@ -13,16 +13,16 @@
         <p> You need to select a category, in order to search for groups</p>
          
           <button ion-button icon-left full (click)="goToSettingsPage()">
-              <ion-icon name="search"></ion-icon>
+              <ion-icon name="settings"></ion-icon>
             Settings Page
           </button>
       </ion-card-content>
     </ion-card>
     <ion-list>  
       <ion-item *ngFor="let item of favouriteCategories">
-        <button ion-button (click)="searchGroups(item.category.id)" > {{item?.category.name}}</button>
+        <button ion-button clear (click)="searchGroups(item.category.id)" > {{item?.category.name}}</button>
       </ion-item>
-      <button *ngIf="favouriteCategories != ''"ion-button round (click)="clearStorage()">Delete Category</button>
+      <button *ngIf="favouriteCategories != ''" ion-button block (click)="clearStorage()">Delete Category</button>
     </ion-list>
   <ion-card *ngFor="let group of groups">
    <img *ngIf="group.key_photo?.thumb_link != undefined" src="{{group.key_photo?.thumb_link}}"/>

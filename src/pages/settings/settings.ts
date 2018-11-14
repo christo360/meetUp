@@ -42,8 +42,8 @@ export class SettingsPage {
   itemSelected(category){
 
       let confirm = this.alertController.create({
-        title:'Add to favourite?',
-        message:'Are you sure you want to add this category as a favourite?',
+        title:'Add Category?',
+        message:'Are you sure you want to add this category?',
         buttons: [{
 
           text:'Yes',
