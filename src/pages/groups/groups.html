@@ -7,23 +7,21 @@
 <ion-content padding>
   <h2>Welcome to MeetUp!</h2>
     <ion-list>  
-        <form [formGroup]="meetupForm" (ngSubmit)="submitForm()">
       <ion-item *ngFor="let item of favouriteCategories">
-        <ion-label>{{item?.category.name}}</ion-label>
-        <ion-checkbox (ionChange)="checkboxChange(item.category,$event)"></ion-checkbox>
+        <button ion-button (click)="submitForm(item.category.id)" > {{item?.category.name}}</button>
       </ion-item>
-      <button ion-button round >Submit</button>
-    </form>
-      <button ion-button round [disabled]="!favouriteCategories" (click)="clearStorage()">Delete all Categories</button>
+      <button *ngIf="favouriteCategories != ''"ion-button round (click)="clearStorage()">Delete all Categories</button>
     </ion-list>
   <ion-card *ngFor="let group of groups">
-   <!-- <img src="{{group.group_photo.photo_link}}"/> -->
+   <img *ngIf="group.key_photo?.thumb_link != undefined" src="{{group.key_photo?.thumb_link}}"/>
      <ion-card-content>
        <ion-card-title>
          {{group.name}} - {{group.localized_location}}
          </ion-card-title>
          {{group.description}}
-         {{group.meta_category.name}}
+         <div *ngIf="group.meta_category.name != null || group.meta_category.name != undefined">
+           <h1>Group Category</h1> <button ion-button (click)="refineSearch(group.meta_category.category_ids)">{{group.meta_category.name}}</button>
+         </div>
      </ion-card-content>
    </ion-card>
 </ion-content>
