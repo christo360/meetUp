@@ -18,7 +18,7 @@ export class MeetupServiceProvider {
     let params = new HttpParams()
         .set("cache-control","no-cache")
         .set("Postman-Token","6417d217-133b-45f9-b9b9-ae5448f70901");
-    return this.http.get(this.baseUrl+'/2/categories?key=4458554c4b22ad705541556f762b7c',{ params: params });
+    return this.http.get(this.baseUrl+'/2/categories?key='+this.apiKey,{ params: params });
 }
 
 }

@@ -6,15 +6,17 @@
 
 <ion-content padding>
   <h2>Welcome to MeetUp!</h2>
-  <ion-list>  
-      <ion-item>
-          <ion-label color="primary">City Name</ion-label>
-          <ion-input type="text"  placeholder="ex. London"></ion-input>
+  <form [formGroup]="meetupForm" (ngSubmit)="submitForm()">
+    <ion-list>  
+        <ion-item>
+            <ion-label color="primary">City Name</ion-label>
+            <ion-input type="text" formControlName="location"  placeholder="ex. London"></ion-input>
+        </ion-item>
+      <ion-item *ngFor="let item of favouriteCategories">
+        <ion-label>{{item?.category.name}}</ion-label>
+        <ion-checkbox (ionChange)="checkboxChange(item.category,$event)"></ion-checkbox>
       </ion-item>
-    <ion-item *ngFor="let item of favouriteCategories">
-      <ion-label>{{item?.category.name}}</ion-label>
-      <ion-checkbox (ionChange)="checkboxChange(item.category,$event)"></ion-checkbox>
-    </ion-item>
-    <button ion-button round>Submit</button>
-  </ion-list>
+      <button ion-button round [disabled]="!meetupForm.valid">Submit</button>
+    </ion-list>
+  </form>
 </ion-content>
