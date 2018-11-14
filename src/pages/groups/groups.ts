@@ -13,6 +13,7 @@ export class GroupsPage {
 
   public favouriteCategories = [];
   public groups = [];
+  public newGroups = [];
   public checkedList = [];
   private meetupForm : FormGroup;
 
@@ -74,11 +75,29 @@ export class GroupsPage {
       });
   }
 
+  refineSearch(category){
+   this.groups = [];
+   let loader = this.loadingController.create(
+    {
+      content:'Loading Groups!',
+      spinner:'dots'
+    });
+    loader.present().then(()=>{
+      var location = "location=Johannesburg";
+      this.meetupService.getGroups(location,category).subscribe(result => {
+        var responseData = result as any;
+        this.groups = responseData;
+        console.log(this.groups);
+        loader.dismiss();
+      })
+    });
+  }
+
   clearStorage() {
 
     let confirm = this.alertController.create({
-      title:'Remove all favourite Categories',
-      message:'Are you sure you want to remove all categories from your favourites?',
+      title:'Remove favourite Category',
+      message:'Are you sure you want to remove your favourite category?',
       buttons: [{
 
         text:'Yes',
@@ -86,7 +105,7 @@ export class GroupsPage {
     
           this.localStorage.removeAllFromStorage()
           let toast = this.toastController.create({
-            message:'All categories have been removed',
+            message:'Category Removed',
             duration: 3000,
             position:'bottom'
 
