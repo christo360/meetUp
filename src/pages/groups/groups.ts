@@ -25,11 +25,6 @@ export class GroupsPage {
               public loadingController: LoadingController,
               public alertController: AlertController,
               public toastController: ToastController ) {
-
-              this.meetupForm = this.formBuilder.group({
-                  location: ['', Validators.required],
-              });
-
   }
 
   ionViewDidLoad() {
@@ -46,21 +41,8 @@ export class GroupsPage {
       });
    }
 
-   checkboxChange(item, event) {
-    if(event.checked) {
-      this.checkedList.push(item.id);
-    } else {
-      for(var i = 0 ; i < this.favouriteCategories.length; i++) {
-        if(this.checkedList[i] == item.id){
-          this.checkedList.splice(i,1);
-        }
-      }
-    }
-  }
-
   searchGroups(category){
-    console.log(category)
-
+    this.groups = [];
     let loader = this.loadingController.create(
       {
         content:'Loading Groups!',
@@ -77,26 +59,7 @@ export class GroupsPage {
       });
   }
 
-  refineSearch(category){
-   this.groups = [];
-   let loader = this.loadingController.create(
-    {
-      content:'Loading Groups!',
-      spinner:'dots'
-    });
-    loader.present().then(()=>{
-      var location = "location=Johannesburg";
-      this.meetupService.getGroups(location,category).subscribe(result => {
-        var responseData = result as any;
-        this.groups = responseData;
-        console.log(this.groups);
-        loader.dismiss();
-      })
-    });
-  }
-
   clearStorage() {
-
     let confirm = this.alertController.create({
       title:'Remove favourite Category',
       message:'Are you sure you want to remove your favourite category?',
