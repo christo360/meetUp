@@ -57,7 +57,8 @@ export class GroupsPage {
     }
   }
 
-  submitForm(){
+  searchGroups(category){
+    console.log(category)
 
     let loader = this.loadingController.create(
       {
@@ -66,7 +67,7 @@ export class GroupsPage {
       });
       loader.present().then(()=>{
         var location = "location=Johannesburg";
-        this.meetupService.getGroups(location,this.checkedList).subscribe(result => {
+        this.meetupService.getGroups(location,category).subscribe(result => {
           var responseData = result as any;
           this.groups = responseData;
           console.log(this.groups);

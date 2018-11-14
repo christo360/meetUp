@@ -8,7 +8,7 @@
   <h2>Welcome to MeetUp!</h2>
     <ion-list>  
       <ion-item *ngFor="let item of favouriteCategories">
-        <button ion-button (click)="submitForm(item.category.id)" > {{item?.category.name}}</button>
+        <button ion-button (click)="searchGroups(item.category.id)" > {{item?.category.name}}</button>
       </ion-item>
       <button *ngIf="favouriteCategories != ''"ion-button round (click)="clearStorage()">Delete all Categories</button>
     </ion-list>
