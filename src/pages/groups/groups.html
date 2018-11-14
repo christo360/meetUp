@@ -28,11 +28,15 @@
    <img *ngIf="group.key_photo?.thumb_link != undefined" src="{{group.key_photo?.thumb_link}}"/>
      <ion-card-content>
        <ion-card-title>
-         {{group.name}} - {{group.localized_location}}
+        <b>{{group.name}} - {{group.localized_location}}</b> 
          </ion-card-title>
+         <h2><b>Description: </b></h2>
          {{group.description}}
+         <h2><b>Lattitude: {{group.lat}}</b></h2>
+         <h2><b>Longitude: {{group.lon}}</b></h2>
+         <br>
          <div *ngIf="group.meta_category.name != null || group.meta_category.name != undefined">
-           <h1>Group Category</h1> <button ion-button (click)="refineSearch(group.meta_category.category_ids)">{{group.meta_category.name}}</button>
+           <h2><b>Group Category: </b></h2> <button ion-button full (click)="searchGroups(group.meta_category.category_ids)">{{group.meta_category.name}}</button>
          </div>
      </ion-card-content>
    </ion-card>
