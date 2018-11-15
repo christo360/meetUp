@@ -31,7 +31,7 @@
         <b>{{group.name}} - {{group.localized_location}}</b> 
          </ion-card-title>
          <h2><b>Description: </b></h2>
-         {{group.description}}
+         <div [innerHTML]="group.description"></div>
          <h2><b>Lattitude: {{group.lat}}</b></h2>
          <h2><b>Longitude: {{group.lon}}</b></h2>
          <br>
