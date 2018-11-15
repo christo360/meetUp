@@ -15,10 +15,7 @@ export class MeetupServiceProvider {
 
 
   public getCategories(): Observable<any> {
-    let params = new HttpParams()
-        .set("cache-control","no-cache")
-        .set("Postman-Token","6417d217-133b-45f9-b9b9-ae5448f70901");
-    return this.http.get(this.baseUrl+'/2/categories?key='+this.apiKey,{ params: params });
+    return this.http.get(this.baseUrl+'/2/categories?key='+this.apiKey);
 }
 
   public getGroups(location,categories): Observable<any> {

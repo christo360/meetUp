@@ -45,7 +45,7 @@ export class GroupsPage {
     this.groups = [];
     let loader = this.loadingController.create(
       {
-        content:'Loading Groups!',
+        content:'Searching for Groups!',
         spinner:'dots'
       });
       loader.present().then(()=>{

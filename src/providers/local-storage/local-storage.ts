@@ -16,10 +16,6 @@ export class LocalStorageProvider {
     this.storage.set(category.id.toString(), JSON.stringify(Item));
   }
 
-  removeCategory(category){
-    this.storage.remove(category.id.toString());
-  }
-
   getAllInterestedCategories(){
     let results = [];
     this.storage.forEach(data =>{
@@ -31,7 +27,6 @@ export class LocalStorageProvider {
 
   removeAllFromStorage(){
     this.storage.clear();
-    console.log("Removal");
   }
 
 }
